@@ -1,0 +1,47 @@
+# Silver Pipeline Configuration
+# Azure Databricks Delta Live Tables Pipeline Configuration
+
+pipeline:
+  bronze_schema: "bronze"
+  silver_schema: "silver"
+  
+tables:
+  schema_rules: "business_rules.schema_definitions"
+  transform_rules: "business_rules.transform_definitions"
+  
+sources:
+  - name: "source1"
+    lobs: ["lob1", "lob2"]
+    domains: ["pharmacy", "medical", "member"]
+  - name: "source2"
+    lobs: ["lob3"]
+    domains: ["pharmacy", "member"]
+
+processing:
+  batch_size: 1000000
+  enable_optimization: true
+  checkpoint_location: "/mnt/checkpoints/silver_pipeline"
+
+# Data Quality Settings
+data_quality:
+  validation_enabled: true
+  null_tolerance_percent: 5
+  required_field_validation: true
+  data_type_validation: true
+
+# Performance Settings
+performance:
+  max_processing_time_hours: 2
+  max_file_size_gb: 100
+  enable_parallel_processing: true
+  spark_config:
+    "spark.sql.adaptive.enabled": "true"
+    "spark.sql.adaptive.coalescePartitions.enabled": "true"
+    "spark.sql.adaptive.skewJoin.enabled": "true"
+
+# Monitoring Settings
+monitoring:
+  enable_metrics: true
+  enable_alerts: true
+  log_level: "INFO"
+  retention_days: 30
