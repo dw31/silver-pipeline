@@ -10,12 +10,9 @@ tables:
   transform_rules: "business_rules.transform_definitions"
   
 sources:
-  - name: "source1"
-    lobs: ["lob1", "lob2"]
-    domains: ["pharmacy", "medical", "member"]
-  - name: "source2"
-    lobs: ["lob3"]
-    domains: ["pharmacy", "member"]
+  - name: "isdw"
+    lobs: ["ms"]
+    domains: ["mbr"]
 
 processing:
   batch_size: 1000000

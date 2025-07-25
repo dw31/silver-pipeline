@@ -115,7 +115,7 @@ class ConfigLoader:
                     raise ValueError(f"Missing required source config: {key}")
             
             # Validate domains
-            valid_domains = {'pharmacy', 'medical', 'member'}
+            valid_domains = {'pharmacy', 'medical', 'mbr'}
             for domain in source['domains']:
                 if domain not in valid_domains:
                     raise ValueError(f"Invalid domain '{domain}'. Must be one of: {valid_domains}")
@@ -189,7 +189,7 @@ class ConfigLoader:
         if self._pipeline_config is None:
             self.load_config()
         
-        return f"{self._pipeline_config.bronze_schema}.{source}_{lob}_{domain}_{year_month}"
+        return f"{self._pipeline_config.bronze_schema}.{source}_{lob}_{domain}_{year_month}_bronze"
     
     def get_silver_table_name(self, source: str, lob: str, domain: str, year: str, stage: str) -> str:
         """
